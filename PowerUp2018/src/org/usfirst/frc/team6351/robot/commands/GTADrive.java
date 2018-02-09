@@ -60,7 +60,7 @@ public class GTADrive extends Command {
     	
     	//Creating motor variables
     	double leftMotors = ((rightTrigger) - leftTrigger + leftJoystickXAxis)*RobotMap.Drive_Scaling_Teleop;
-    	double rightMotors = (rightTrigger - leftTrigger - leftJoystickXAxis)*RobotMap.Drive_Scaling_Teleop*(-1);
+    	double rightMotors = (rightTrigger - leftTrigger - leftJoystickXAxis)*RobotMap.Drive_Scaling_Teleop*RobotMap.Curve_Reduction_Factor*(-1);
     	
     	if (leftMotors > RobotMap.MAX_ROBOT_SPEED) {
     		   
