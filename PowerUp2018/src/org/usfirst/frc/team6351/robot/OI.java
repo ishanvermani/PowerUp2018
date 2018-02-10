@@ -51,8 +51,10 @@ public class OI {
 	public Button joystick12 = new JoystickButton(flightstick1, RobotMap.Joy_Button_12);
 	
 	public OI() {
+		driverA.whenPressed(new ArmUp());
+		driverB.whenPressed(new ArmDown());
 		driverX.whenPressed(new LowerArmSolenoids());
-		driverY.whenPressed(new GrabberSolenoids());
+		driverY.whenPressed(new GrabberSolenoids());	
 	}
 	
 	//Method for getting an axis value on the driver joystick
