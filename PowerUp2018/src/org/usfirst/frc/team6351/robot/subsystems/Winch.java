@@ -1,20 +1,22 @@
 package org.usfirst.frc.team6351.robot.subsystems;
 
-import org.usfirst.frc.team6351.robot.commands.UpperArm;
+import edu.wpi.first.wpilibj.Spark;
 
-public class Winch extends subsystem {
+import edu.wpi.first.wpilibj.command.Subsystem;
+
+public abstract class Winch extends Subsystem {
   
-// Put methods for controlling this subsystem
-// here. Call these from Commands.
-  Spark winchMotor = new Spark(0);
+  	// Put methods for controlling this subsystem
+    // here. Call these from Commands.
+  Spark winch_Motor = new Spark(0);
   
   public void oneDirection() {
-    winchMotor.set(0.6);
+    winch_Motor.set(0.6);
   }
   public void otherDirection() {
-    winchMotor.set(-0.6);
+    winch_Motor.set(-0.6);
   }
   public void stop() {
-    winchMotor.set(0);
+    winch_Motor.set(0);
   }
 }
