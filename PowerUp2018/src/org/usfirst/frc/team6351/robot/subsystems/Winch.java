@@ -17,7 +17,4 @@ public class Winch extends subsystem {
   public void stop() {
     winchMotor.set(0);
   }
-  public void initDefaultCommand {
-    setDefaultCommand(new UpperArm());
-  }
 }
