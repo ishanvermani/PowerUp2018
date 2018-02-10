@@ -1,8 +1,10 @@
 package org.usfirst.frc.team6351.robot;
 
 
-import org.usfirst.frc.team6351.robot.commands.GrabberSolenoids;
+import org.usfirst.frc.team6351.robot.commands.GrabberSolenoids; 
 import org.usfirst.frc.team6351.robot.commands.LowerArmSolenoids;
+import org.usfirst.frc.team6351.robot.commands.ArmUp;
+import org.usfirst.frc.team6351.robot.commands.ArmDown;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
