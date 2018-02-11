@@ -20,7 +20,7 @@ public class Winch extends Subsystem {
     winch_Motor.set(0);
   }
 @Override
-protected void initDefaultCommand() {
+	protected void initDefaultCommand() {
 	
-}
+	}
 }
