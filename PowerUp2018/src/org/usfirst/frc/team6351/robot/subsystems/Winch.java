@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.Spark;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-public abstract class Winch extends Subsystem {
+public class Winch extends Subsystem {
   
   	// Put methods for controlling this subsystem
     // here. Call these from Commands.
@@ -19,4 +19,8 @@ public abstract class Winch extends Subsystem {
   public void stop() {
     winch_Motor.set(0);
   }
+@Override
+protected void initDefaultCommand() {
+	
+}
 }
