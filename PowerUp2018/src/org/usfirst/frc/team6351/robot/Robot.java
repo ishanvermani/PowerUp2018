@@ -16,7 +16,6 @@ import org.usfirst.frc.team6351.robot.commands.GyroTurnToAngle;
 import org.usfirst.frc.team6351.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team6351.robot.subsystems.Pneumatics;
 import org.usfirst.frc.team6351.robot.subsystems.Sensors;
-import org.usfirst.frc.team6351.robot.subsystems.Winch;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -30,7 +29,6 @@ public class Robot extends TimedRobot {
 	public static final DriveTrain driveTrain = new DriveTrain();
 	public static final Sensors sensors = new Sensors();
 	public static final Pneumatics pneumatics = new Pneumatics();
-	public static final Winch Winch = new Winch();
 	public static OI m_oi;
 	
 	Command m_autonomousCommand;
