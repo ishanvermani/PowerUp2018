@@ -1,10 +1,12 @@
 package org.usfirst.frc.team6351.robot.commands;
 
 import org.usfirst.frc.team6351.robot.Robot;
-import org.usfirst.frc.team6351.robot.RobotMap;
+
+import edu.wpi.first.wpilibj.command.Command;
 
 public class ArmDown extends Command {
-	public UpperArm() {
+	
+	public ArmDown() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
 		requires(Robot.winch);
@@ -21,7 +23,7 @@ public class ArmDown extends Command {
 	
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-	return false;
+    	return false;
     }
 	
     // Called once after isFinished returns true
@@ -33,5 +35,4 @@ public class ArmDown extends Command {
     // subsystems is scheduled to run
     protected void interrupted() {
     }
-    
 }

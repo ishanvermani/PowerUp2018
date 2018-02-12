@@ -24,6 +24,7 @@ public class FlightStickDrive extends Command {
     	double joystickThottle = Robot.m_oi.joystickAxisValue(RobotMap.Joy_Throttle);
     	
     	double speedMultiplier;
+    	
     	if (joystickThottle < 0) {
     		speedMultiplier = (0.5-(joystickThottle * -0.5));
     	}

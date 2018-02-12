@@ -6,7 +6,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.interfaces.Accelerometer;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Encoder;
 
 public class Sensors extends Subsystem {
@@ -51,7 +50,6 @@ public class Sensors extends Subsystem {
     }
     public double getDriveEncoderDistance() {
     	//Convert counts to centimeters
-    	double distanceCM = (driveEncoderLeft.get()) / (7.95);
     	double distanceIN = (driveEncoderLeft.get()) / (20.193);
     	return distanceIN ;
     }
