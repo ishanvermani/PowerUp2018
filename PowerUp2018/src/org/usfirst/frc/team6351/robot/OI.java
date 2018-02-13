@@ -1,8 +1,10 @@
 package org.usfirst.frc.team6351.robot;
 
 
-import org.usfirst.frc.team6351.robot.commands.GrabberSolenoids;
+import org.usfirst.frc.team6351.robot.commands.GrabberSolenoids; 
 import org.usfirst.frc.team6351.robot.commands.LowerArmSolenoids;
+import org.usfirst.frc.team6351.robot.commands.ArmUp;
+import org.usfirst.frc.team6351.robot.commands.ArmDown;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -51,8 +53,10 @@ public class OI {
 	public Button joystick12 = new JoystickButton(flightstick1, RobotMap.Joy_Button_12);
 	
 	public OI() {
-		driverX.whenPressed(new LowerArmSolenoids());
-		driverY.whenPressed(new GrabberSolenoids());
+		controllerA.toggleWhenPressed(new ArmUp());
+		controllerB.toggleWhenPressed(new ArmDown());
+		controllerX.whenPressed(new GrabberSolenoids());
+		controllerY.whenPressed(new LowerArmSolenoids());	
 	}
 	
 	//Method for getting an axis value on the driver joystick

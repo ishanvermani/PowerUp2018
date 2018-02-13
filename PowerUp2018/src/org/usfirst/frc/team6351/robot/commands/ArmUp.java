@@ -4,50 +4,37 @@ import org.usfirst.frc.team6351.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
- *
- */
-public class ClimbingSolenoids extends Command {
+public class ArmUp extends Command {
 	
-    public ClimbingSolenoids() {
+	public ArmUp() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    		requires(Robot.pneumatics);
-
-    }
-
+		requires(Robot.winch);
+	}
+	
     // Called just before this Command runs the first time
-    protected void initialize() {
-    		boolean currentState = Robot.pneumatics.getSolenoidState(0);
-    		if (currentState == true) {
-    			Robot.pneumatics.moveLowerArmOut(false);
-    		} else {
-    			Robot.pneumatics.moveLowerArmOut(true);
-    		}
+    protected void initialize() {	
     }
-
+	
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	Robot.winch.oneDirection();
     }
-
+	
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+    	return false;
     }
-
+	
     // Called once after isFinished returns true
     protected void end() {
-		boolean currentState = Robot.pneumatics.getSolenoidState(0);
-		if (currentState == true) {
-			Robot.pneumatics.moveLowerArmOut(false);
-		} else {
-			Robot.pneumatics.moveLowerArmOut(true);
-		}
+    	Robot.winch.stop();
     }
-
+	
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	
     }
 }
+
+
