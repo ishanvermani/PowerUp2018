@@ -8,7 +8,8 @@ public class Winch extends Subsystem {
   	// Put methods for controlling this subsystem
     // here. Call these from Commands.
 	
-	Spark winch_Motor = new Spark(0);
+	Spark climber_Winch_Motor = new Spark(0);
+	Spark arm_Winch_Motor = new Spark(5);
 
 @Override
     public void initDefaultCommand() {
@@ -17,15 +18,15 @@ public class Winch extends Subsystem {
     }
 
     // Movement Commands
-    public void oneDirection() {
-    	winch_Motor.set(0.3);
+    public void armUp() {
+    	arm_Winch_Motor.set(0.3);
     }
     
-    public void otherDirection() {
-    	winch_Motor.set(-0.3);
+    public void armDown() {
+    	arm_Winch_Motor.set(-0.3);
     }
     
-    public void stop() {
-    	winch_Motor.set(0);
+    public void winchClimb() {
+    	climber_Winch_Motor.set(0.3);
     }
 }

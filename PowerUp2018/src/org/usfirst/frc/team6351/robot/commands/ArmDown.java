@@ -18,7 +18,7 @@ public class ArmDown extends Command {
 	
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.winch.otherDirection();
+    	Robot.winch.armDown();
     }
 	
     // Make this return true when this Command no longer needs to run execute()
@@ -28,7 +28,7 @@ public class ArmDown extends Command {
 	
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.winch.stop();
+    	// Command will only be run while button is held (in OI)
     }
 	
     // Called when another command which requires one or more of the same
