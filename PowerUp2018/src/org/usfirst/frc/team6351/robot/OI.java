@@ -54,11 +54,14 @@ public class OI {
 	public Button joystick12 = new JoystickButton(flightstick1, RobotMap.Joy_Button_12);
 	
 	public OI() {
-		controllerA.whileHeld(new ArmUp());
-		controllerB.whileHeld(new ArmDown());
+		controllerA.whenPressed(new ArmUp());
+		controllerB.whenReleased(new ArmStop();
+		controllerB.whenPressed(new ArmDown());
+		controllerB.whenReleased(new ArmStop());
 		controllerX.whenPressed(new GrabberSolenoids());
 		controllerY.whenPressed(new LowerArmSolenoids());	
-		controllerLeftBumper.whileHeld(new ClimbingWinch());
+		controllerLeftBumper.whenPressed(new ClimbingWinch());
+		controllerLeftBumper.whenReleased(new ClimbingStop());			 
 	}
 	
 	//Method for getting an axis value on the driver joystick
