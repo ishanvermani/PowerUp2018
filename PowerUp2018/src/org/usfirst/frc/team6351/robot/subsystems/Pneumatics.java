@@ -4,6 +4,7 @@ import org.usfirst.frc.team6351.robot.Robot;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -13,7 +14,7 @@ public class Pneumatics extends Subsystem {
 	static Compressor compressor;
 	static Solenoid s0 = new Solenoid(0);
 	static Solenoid s1 = new Solenoid(1);
-	static Solenoid s2 = new Solenoid(2);
+	static DoubleSolenoid s23 = new DoubleSolenoid(2, 3);
 	  
 	public Pneumatics(){
 		compressor = new Compressor();
@@ -70,14 +71,20 @@ public class Pneumatics extends Subsystem {
     public void moveGrabber(boolean op) {
     	s1.set(op);
     }
+    
+    public void raiseHook() {
+    	s23.set(DoubleSolenoid.Value.kForward);
+    }
+    
+    public void lowerHook() {
+    	s23.set(DoubleSolenoid.Value.kReverse);
+    }
     public boolean getSolenoidState(int solenoid) {
     		boolean currentState = false;
     		switch (solenoid) {
     			case 0: currentState = s0.get();
     				break;
     			case 1: currentState = s1.get();
-    				break;
-    			case 2: currentState = s2.get();
     				break;
     		}
     		return currentState;
