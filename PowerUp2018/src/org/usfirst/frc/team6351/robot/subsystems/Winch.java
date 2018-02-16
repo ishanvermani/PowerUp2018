@@ -31,11 +31,11 @@ public class Winch extends Subsystem {
     }
 	
     public void winchClimb() {
-    	climber_Winch_Motor.set(-0.5);
+    	climber_Winch_Motor.set(-1);
     }
     
     public void winchReverse() {
-    	climber_Winch_Motor.set(0.5);
+    	climber_Winch_Motor.set(1);
     }
 
     public void winchStop() { 
