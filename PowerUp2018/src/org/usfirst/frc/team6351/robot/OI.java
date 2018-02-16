@@ -5,7 +5,12 @@ import org.usfirst.frc.team6351.robot.commands.GrabberSolenoids;
 import org.usfirst.frc.team6351.robot.commands.LowerArmSolenoids;
 import org.usfirst.frc.team6351.robot.commands.ArmUp;
 import org.usfirst.frc.team6351.robot.commands.ArmDown;
+import org.usfirst.frc.team6351.robot.commands.ArmStop;
 import org.usfirst.frc.team6351.robot.commands.ClimbingWinch;
+import org.usfirst.frc.team6351.robot.commands.ClimbingStop;
+import org.usfirst.frc.team6351.robot.commands.ClimbingReverse;
+import org.usfirst.frc.team6351.robot.commands.HookDown;
+import org.usfirst.frc.team6351.robot.commands.HookUp;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -55,13 +60,17 @@ public class OI {
 	
 	public OI() {
 		controllerA.whenPressed(new ArmUp());
-		controllerB.whenReleased(new ArmStop();
+		controllerA.whenReleased(new ArmStop());
 		controllerB.whenPressed(new ArmDown());
 		controllerB.whenReleased(new ArmStop());
 		controllerX.whenPressed(new GrabberSolenoids());
 		controllerY.whenPressed(new LowerArmSolenoids());	
 		controllerLeftBumper.whenPressed(new ClimbingWinch());
-		controllerLeftBumper.whenReleased(new ClimbingStop());			 
+		controllerLeftBumper.whenReleased(new ClimbingStop());		
+		controllerRightBumper.whenPressed(new ClimbingReverse());
+		controllerRightBumper.whenReleased(new ClimbingStop());
+		controllerLeftTrigger.whenPressed(new HookUp());
+		controllerRightTrigger.toggleWhenPressed(new HookDown());
 	}
 	
 	//Method for getting an axis value on the driver joystick
