@@ -18,12 +18,13 @@ public class LowerArmSolenoids extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    		boolean currentState = Robot.pneumatics.getSolenoidState(0);
-    		if (currentState == true) {
-    			Robot.pneumatics.moveLowerArmOut(false);
-    		} else {
-    			Robot.pneumatics.moveLowerArmOut(true);
-    		}
+    	boolean currentState = Robot.pneumatics.getDouble();
+		if (currentState == true) {
+			Robot.pneumatics.lowerBoom();
+		} else {
+			Robot.pneumatics.raiseBoom();
+		}
+    		
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -37,6 +38,7 @@ public class LowerArmSolenoids extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	
     }
 
     // Called when another command which requires one or more of the same
