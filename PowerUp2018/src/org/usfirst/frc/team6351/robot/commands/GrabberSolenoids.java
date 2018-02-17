@@ -18,7 +18,7 @@ public class GrabberSolenoids extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    		boolean currentState = Robot.pneumatics.getSolenoidState(1);
+    		boolean currentState = Robot.pneumatics.getSolenoidState(0);
     		if (currentState == true) {
     			Robot.pneumatics.moveGrabber(false);
     		} else {
