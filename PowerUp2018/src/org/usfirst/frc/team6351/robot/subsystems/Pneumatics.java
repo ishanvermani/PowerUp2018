@@ -101,16 +101,16 @@ public class Pneumatics extends Subsystem {
     }
     
     public boolean getDouble() {
-    	boolean doubleState = false;
+    	boolean s23State = false;
     	switch (s23.get()) {
-    		case kForward: doubleState = true;
+    		case kForward: s23State = true;
     			break;
-    		case kReverse: doubleState = false;
+    		case kReverse: s23State = false;
     			break;
     		case kOff: 
     			break;
     	}
-    	return doubleState;
+    	return s23State;
 
     	
     	}
