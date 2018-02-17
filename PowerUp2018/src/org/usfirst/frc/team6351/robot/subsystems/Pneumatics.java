@@ -65,20 +65,28 @@ public class Pneumatics extends Subsystem {
     public void stopCompressor() {
     	compressor.stop();
     }
-    public void moveLowerArmOut(boolean op) {
-    	s0.set(op);
-    }
-    public void moveGrabber(boolean op) {
+
+    
+    public void moveClimberArm(boolean op) {
     	s1.set(op);
     }
     
-    public void raiseHook() {
+    public void moveGrabber(boolean op) {
+    	s0.set(op);
+    }
+    
+    public void raiseBoom() {
     	s23.set(DoubleSolenoid.Value.kForward);
     }
     
-    public void lowerHook() {
+    public void lowerBoom() {
     	s23.set(DoubleSolenoid.Value.kReverse);
     }
+    
+    public void kOff() {
+    	s23.set(DoubleSolenoid.Value.kOff);
+    }
+    
     public boolean getSolenoidState(int solenoid) {
     		boolean currentState = false;
     		switch (solenoid) {
@@ -88,6 +96,9 @@ public class Pneumatics extends Subsystem {
     				break;
     		}
     		return currentState;
+    		
     }
+
+ 
 }
 
