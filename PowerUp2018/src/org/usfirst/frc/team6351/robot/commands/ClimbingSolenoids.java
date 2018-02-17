@@ -18,13 +18,14 @@ public class ClimbingSolenoids extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    		boolean currentState = Robot.pneumatics.getSolenoidState(0);
-    		if (currentState == true) {
-    			Robot.pneumatics.moveLowerArmOut(false);
-    		} else {
-    			Robot.pneumatics.moveLowerArmOut(true);
-    		}
-    }
+    	boolean currentState = Robot.pneumatics.getSolenoidState(1);
+		if (currentState == true) {
+			Robot.pneumatics.moveClimberArm(false);
+		} else {
+			Robot.pneumatics.moveClimberArm(true);
+		}
+}
+
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
@@ -32,17 +33,12 @@ public class ClimbingSolenoids extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-		boolean currentState = Robot.pneumatics.getSolenoidState(0);
-		if (currentState == true) {
-			Robot.pneumatics.moveLowerArmOut(false);
-		} else {
-			Robot.pneumatics.moveLowerArmOut(true);
-		}
+		
     }
 
     // Called when another command which requires one or more of the same
