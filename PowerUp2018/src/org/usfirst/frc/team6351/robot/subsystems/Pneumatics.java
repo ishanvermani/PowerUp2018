@@ -19,7 +19,7 @@ public class Pneumatics extends Subsystem {
 	  
 	public Pneumatics(){
 		compressor = new Compressor();
-
+		
 	}
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
@@ -89,15 +89,14 @@ public class Pneumatics extends Subsystem {
     }
     
     public boolean getSolenoidState(int solenoid) {
-    		boolean currentState = false;
-    		switch (solenoid) {
-    			case 0: currentState = s0.get();
-    				break;
-    			case 1: currentState = s1.get();
-    				break;
-    		}
-    		return currentState;
-    		
+    	boolean currentState = false;
+    	switch (solenoid) {
+    		case 0: currentState = s0.get();
+    			break;
+    		case 1: currentState = s1.get();
+    			break;
+    	}
+    	return currentState;	
     }
     
     public boolean getDouble() {
@@ -111,10 +110,5 @@ public class Pneumatics extends Subsystem {
     			break;
     	}
     	return s23State;
-
-    	
     	}
-    
-
 }
-
