@@ -65,7 +65,7 @@ public class OI {
 		controllerA.whenPressed(new ArmDown());
 		controllerA.whenReleased(new ArmStop());
 		controllerB.whenPressed(new LowerArmSolenoids());
-		controllerX.whenPressed(new GrabberSolenoids());
+		controllerX.whenPressed(new GrabberSolenoids()); 
 		controllerY.whenPressed(new ArmUp());
 		controllerY.whenReleased(new ArmStop());
 		controllerLeftBumper.whenPressed(new ClimbingReverse());

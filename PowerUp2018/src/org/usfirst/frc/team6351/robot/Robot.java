@@ -4,14 +4,20 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-
+import org.usfirst.frc.team6351.robot.auto.commands.Auto_ArmToPosition;
+import org.usfirst.frc.team6351.robot.auto.commands.Auto_ArmUpToScale;
+import org.usfirst.frc.team6351.robot.auto.commands.Auto_DriveStraight;
+import org.usfirst.frc.team6351.robot.auto.commands.Auto_SwitchInception;
+import org.usfirst.frc.team6351.robot.auto.commands.GyroTurnToAngle;
+import org.usfirst.frc.team6351.robot.auto.routines.Auto_MasterRoutine;
+import org.usfirst.frc.team6351.robot.auto.routines.Auto_SwitchRoutine;
 import org.usfirst.frc.team6351.robot.commands.GTADrive;
-import org.usfirst.frc.team6351.robot.commands.GyroTurnToAngle;
 import org.usfirst.frc.team6351.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team6351.robot.subsystems.Pneumatics;
 import org.usfirst.frc.team6351.robot.subsystems.Sensors;
@@ -33,7 +39,9 @@ public class Robot extends TimedRobot {
 	public static OI m_oi;
 	
 	Command m_autonomousCommand;
-	SendableChooser<Command> m_autonomousChooser = new SendableChooser<>();
+	SendableChooser<Command> m_autonomousTestingChooser = new SendableChooser<>();
+	SendableChooser<String> m_autonomousRoutine = new SendableChooser<>();
+	SendableChooser<String> m_autonomousStartingPosition = new SendableChooser<>();
 	SendableChooser<Command> driveMode = new SendableChooser<>();
 
 	static NetworkTableInstance networktables = NetworkTableInstance.getDefault();
@@ -52,17 +60,29 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		m_oi = new OI();
-//		m_chooser.addDefault("Default Auto", new ExampleCommand());
-		// chooser.addObject("My Auto", new MyAutoCommand());
+		fms_dataFound = false;
 		
-		m_autonomousChooser.addDefault("Turn 90 Degrees", new GyroTurnToAngle(90));
-		SmartDashboard.putData("Auto mode", m_autonomousChooser);
+//		m_autonomousTestingChooser.addObject("Arm Up To Scale", new Auto_ArmUpToScale());
+//		m_autonomousTestingChooser.addObject("Arm Up To Switch", new Auto_ArmToPosition(1750));
+//		m_autonomousTestingChooser.addObject("Drive Forward 108 inches", new Auto_DriveStraight(108));
+//		m_autonomousTestingChooser.addObject("Switch Auto Routine", new Auto_SwitchRoutine());
+//		m_autonomousTestingChooser.addDefault("Turn 90 Degrees", new GyroTurnToAngle(90));
+//		SmartDashboard.putData("Auto mode", m_autonomousTestingChooser);
+		
+		m_autonomousRoutine.addDefault("Switch/Scale", "switchscale");
+		m_autonomousRoutine.addObject("Cross Line (MUST BE IN LEFT OR RIGHT DS)", "cross");
+		SmartDashboard.putData("Auto Routine", m_autonomousRoutine);
+		m_autonomousStartingPosition.addDefault("Left Position", "L");
+		m_autonomousStartingPosition.addObject("Middle Position", "M");
+		m_autonomousStartingPosition.addObject("Right Position", "R");
+		
+		SmartDashboard.putData("Starting Postion", m_autonomousStartingPosition);
 		
 //	    driveMode.addObject("Flight Stick Control", new FlightStickDrive());
 	    driveMode.addDefault("Two-Person GTA Control", new GTADrive());
 	    SmartDashboard.putData("Drive Control Mode", driveMode);
 
-	    fms_dataFound = false;
+	    
 	}
 
 	/**
@@ -79,6 +99,8 @@ public class Robot extends TimedRobot {
 	public void disabledPeriodic() {
 		getFMSData();
 		Scheduler.getInstance().run();
+//		pneumatics.start();
+		
 	}
 
 	/**
@@ -94,23 +116,34 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		m_autonomousCommand = m_autonomousChooser.getSelected();
-
-		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector",
-		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-		 * = new MyAutoCommand(); break; case "Default Auto": default:
-		 * autonomousCommand = new ExampleCommand(); break; }
-		 */
-
-		// schedule the autonomous command (example)
-		if (m_autonomousCommand != null) {
-			m_autonomousCommand.start();
-		}
+		String routine = m_autonomousRoutine.getSelected();
+		String position = m_autonomousStartingPosition.getSelected();
+		int retries = 100;
+		
 		getFMSData();
+		
 		if (fms_gameData == "NONE") {
 			DriverStation.reportError("No FMS Data Retrived During Autonomous Initiliazation: Attempting Looped Search...", false);
 			fms_dataFound = false;
+		}
+		while (fms_gameData == "NONE" && retries > 0) {
+			retries--;
+			getFMSData();
+			DriverStation.reportError("Searching for FMS Data...", false);
+			Timer.delay(0.1);
+		}
+		if (fms_gameData != "NONE") {
+			DriverStation.reportWarning("Data Found! Starting Auto", false);
+			
+			DriverStation.reportWarning("DATA FROM FMS: "+fms_gameData, false);
+			DriverStation.reportWarning("DATA FROM SMARTDASHBOARD: "+routine+" and "+position, false);
+			
+			fms_dataFound = true;
+			
+			m_autonomousCommand = new Auto_MasterRoutine(fms_gameData.substring(0,1), fms_gameData.substring(1,2), routine, position);
+			m_autonomousCommand.start();
+			
+			
 		}
 	}
 
@@ -120,16 +153,12 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousPeriodic() {
 		getLimeLight();	
-		if (fms_dataFound == false) {
-			getFMSData();
-			if (fms_gameData != "NONE") {
-				DriverStation.reportWarning("FMS Data Retrived", false);
-				fms_dataFound = true;
-				Scheduler.getInstance().run();
-			}
-		} else {
-			Scheduler.getInstance().run();
-		}
+		
+		Scheduler.getInstance().run();
+		
+		SmartDashboard.putNumber("Drive Encoder", sensors.getDriveEncoderDistance());
+		SmartDashboard.putNumber("Drive Encoder RAW", sensors.getDriveEncoderRaw());
+		SmartDashboard.putNumber("gYRO", sensors.getGyroAngle());
 	}
 
 	@Override
@@ -150,7 +179,9 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 		getLimeLight();
-		DriverStation.reportError("Pressure"+pneumatics.getPressureSwitch(), false);
+		SmartDashboard.putNumber("Arm Encoder", sensors.getArmEndcoderRaw());
+		SmartDashboard.putNumber("Drive Encoder", sensors.getDriveEncoderRaw());
+		SmartDashboard.putNumber("Stop Switch Voltage", sensors.getStopSwitchVoltage());
 	}
 	
 	public void getLimeLight() {

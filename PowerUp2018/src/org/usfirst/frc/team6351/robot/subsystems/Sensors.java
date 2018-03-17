@@ -17,6 +17,8 @@ public class Sensors extends Subsystem {
 	public Accelerometer accel;
 	public AnalogInput ultrasonic;
 	public Encoder driveEncoderLeft;
+	public Encoder armEncoder;
+	public AnalogInput stopSwitch;
 	
 	public Sensors() {
 		
@@ -24,6 +26,8 @@ public class Sensors extends Subsystem {
 		accel = new BuiltInAccelerometer();
 		ultrasonic = new AnalogInput(0);
 		driveEncoderLeft = new Encoder(0,1,true,Encoder.EncodingType.k4X);
+		armEncoder = new Encoder(2,3,true,Encoder.EncodingType.k4X);
+		stopSwitch = new AnalogInput(1);
 		
 	}
 	
@@ -50,8 +54,22 @@ public class Sensors extends Subsystem {
     }
     public double getDriveEncoderDistance() {
     	//Convert counts to centimeters
-    	double distanceIN = (driveEncoderLeft.get()) / (20.193);
+    	double distanceIN = (driveEncoderLeft.get()) / (19.1667);
     	return distanceIN ;
     }
+    public double getDriveEncoderRaw() {
+    	return driveEncoderLeft.get();
+    }
+    public double getArmEndcoderRaw() {
+    	//Convert counts to centimeters
+    	double raw = armEncoder.get();
+    	return raw;
+    }
+    public double getStopSwitchVoltage() {
+    	//Convert counts to centimeters
+    	double volts = stopSwitch.getVoltage();
+    	return volts;
+    }
+    
 }
 

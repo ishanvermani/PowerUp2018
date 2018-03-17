@@ -1,4 +1,4 @@
-package org.usfirst.frc.team6351.robot.commands;
+package org.usfirst.frc.team6351.robot.auto.commands;
 
 import org.usfirst.frc.team6351.robot.Robot;
 import org.usfirst.frc.team6351.robot.RobotMap;
@@ -35,23 +35,23 @@ public class GyroTurnToAngle extends Command {
     	double error = Math.abs(targetAngle-Robot.sensors.getGyroAngle());
     	double kP;
     	if (error < 10.0) {
-    		kP = Math.pow((0.09*error), 2);
+    		kP = Math.pow((0.09*error), 2)+0.1;
     	} else {
     		kP = 1;
     	}
     	if (targetAngle < currentAngle){
-    		Robot.driveTrain.setLeft(RobotMap.Drive_Scaling_Auto*(-1)*kP);
-    		Robot.driveTrain.setRight(RobotMap.Drive_Scaling_Auto*(-1)*kP);
+    		Robot.driveTrain.setLeft(0.65*-1*kP);
+    		Robot.driveTrain.setRight(0.65*-1*kP);
     	} else if (targetAngle > currentAngle) {
-    		Robot.driveTrain.setLeft(RobotMap.Drive_Scaling_Auto*kP);
-    		Robot.driveTrain.setRight(RobotMap.Drive_Scaling_Auto*kP);
+    		Robot.driveTrain.setLeft(0.65*kP);
+    		Robot.driveTrain.setRight(0.65*kP);
     	}
     	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if (targetAngle >= Robot.sensors.getGyroAngle() - 1.0 && targetAngle <= Robot.sensors.getGyroAngle() + 1.0) {
+    	if (targetAngle >= Robot.sensors.getGyroAngle() - 10.0 && targetAngle <= Robot.sensors.getGyroAngle() + 10.0) {
     		return true;
     	} else {
     		return false;
