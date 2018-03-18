@@ -182,6 +182,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Arm Encoder", sensors.getArmEndcoderRaw());
 		SmartDashboard.putNumber("Drive Encoder", sensors.getDriveEncoderRaw());
 		SmartDashboard.putNumber("Stop Switch Voltage", sensors.getStopSwitchVoltage());
+		SmartDashboard.putNumber("TIME LEFT IN TELEOP", Timer.getMatchTime());
 	}
 	
 	public void getLimeLight() {
