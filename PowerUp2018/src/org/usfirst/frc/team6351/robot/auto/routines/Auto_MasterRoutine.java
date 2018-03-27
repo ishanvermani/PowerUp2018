@@ -3,6 +3,7 @@ package org.usfirst.frc.team6351.robot.auto.routines;
 import org.usfirst.frc.team6351.robot.Robot;
 import org.usfirst.frc.team6351.robot.auto.commands.Auto_ArmToPosition;
 import org.usfirst.frc.team6351.robot.auto.commands.Auto_ArmUpToScale;
+import org.usfirst.frc.team6351.robot.auto.commands.Auto_DriveBackwards;
 import org.usfirst.frc.team6351.robot.auto.commands.Auto_DriveStraight;
 import org.usfirst.frc.team6351.robot.auto.commands.GyroTurnToAngle;
 import org.usfirst.frc.team6351.robot.commands.GrabberSolenoids;
@@ -72,6 +73,12 @@ public class Auto_MasterRoutine extends CommandGroup {
 				} else if (scalePos.contains("R") == true) {
 					DriverStation.reportError("Right Scale",false);
 					//SCALE CODE iF NO SWITCH ON RIGHT
+				    addSequential(new Auto_DriveStraight(304));
+				    addSequential(new GyroTurnToAngle(90));
+				    addSequential(new Auto_DriveBackwards(5));
+				    addSequential(new Auto_ArmUpToScale());
+				    addSequential(new GrabberSolenoids());
+				    addSequential(new Auto_DriveStraight(10));
 				} else {
 					DriverStation.reportError("Right Auto No Options: Crossing Base Line",false);
 					addSequential(new Auto_DriveStraight(130));
@@ -88,6 +95,12 @@ public class Auto_MasterRoutine extends CommandGroup {
 				} else if (scalePos.contains("L") == true) {
 					DriverStation.reportError("Left Scale",false);
 					//SCALE CODE iF NO SWITCH ON LEFT
+				    addSequential(new Auto_DriveStraight(304));
+				    addSequential(new GyroTurnToAngle(-90));
+				    addSequential(new Auto_DriveBackwards(5));
+				    addSequential(new Auto_ArmUpToScale());
+				    addSequential(new GrabberSolenoids());
+				    addSequential(new Auto_DriveStraight(10));
 				} else {
 					DriverStation.reportError("Left Auto No Options: Crossing Base Line",false);
 					addSequential(new Auto_DriveStraight(130));
