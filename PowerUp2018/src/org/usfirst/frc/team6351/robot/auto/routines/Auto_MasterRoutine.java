@@ -73,7 +73,7 @@ public class Auto_MasterRoutine extends CommandGroup {
 				} else if (scalePos.contains("R") == true) {
 					DriverStation.reportError("Right Scale",false);
 					//SCALE CODE iF NO SWITCH ON RIGHT
-				    addSequential(new Auto_DriveStraight(304));
+				    addSequential(new Auto_DriveStraight(304,0.6));
 				    addSequential(new GyroTurnToAngle(90));
 				    addSequential(new Auto_DriveBackwards(5));
 				    addSequential(new Auto_ArmUpToScale());
@@ -95,7 +95,7 @@ public class Auto_MasterRoutine extends CommandGroup {
 				} else if (scalePos.contains("L") == true) {
 					DriverStation.reportError("Left Scale",false);
 					//SCALE CODE iF NO SWITCH ON LEFT
-				    addSequential(new Auto_DriveStraight(304));
+				    addSequential(new Auto_DriveStraight(304,0.6));
 				    addSequential(new GyroTurnToAngle(-90));
 				    addSequential(new Auto_DriveBackwards(5));
 				    addSequential(new Auto_ArmUpToScale());
