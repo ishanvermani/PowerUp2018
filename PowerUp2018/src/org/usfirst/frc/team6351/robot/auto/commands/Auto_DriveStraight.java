@@ -35,6 +35,13 @@ public class Auto_DriveStraight extends Command {
     	this(0.4, 0.0, distance);
     	
     }
+    
+    public Auto_DriveStraight(double distance, double speed) {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
+    	this(speed, 0.0, distance);
+    	
+    }
 
     // Called just before this Command runs the first time
     protected void initialize() {
