@@ -69,6 +69,9 @@ public class Auto_MasterRoutine extends CommandGroup {
 					addSequential(new GyroTurnToAngle(-90));
 					addSequential(new Auto_DriveStraight(20));
 					addSequential(new GrabberSolenoids());
+				} else if (scalePos.contains("R") == true) {
+					DriverStation.reportError("Right Scale",false);
+					//SCALE CODE iF NO SWITCH ON RIGHT
 				} else {
 					DriverStation.reportError("Right Auto No Options: Crossing Base Line",false);
 					addSequential(new Auto_DriveStraight(130));
@@ -82,6 +85,9 @@ public class Auto_MasterRoutine extends CommandGroup {
 					addSequential(new GyroTurnToAngle(90));
 					addSequential(new Auto_DriveStraight(20));
 					addSequential(new GrabberSolenoids());
+				} else if (scalePos.contains("L") == true) {
+					DriverStation.reportError("Left Scale",false);
+					//SCALE CODE iF NO SWITCH ON LEFT
 				} else {
 					DriverStation.reportError("Left Auto No Options: Crossing Base Line",false);
 					addSequential(new Auto_DriveStraight(130));
