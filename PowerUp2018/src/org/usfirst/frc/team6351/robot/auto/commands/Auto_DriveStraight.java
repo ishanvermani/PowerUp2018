@@ -63,8 +63,8 @@ public class Auto_DriveStraight extends Command {
     	if (encoderDrive == true) {
     		double currentDistance = Robot.sensors.getDriveEncoderDistance();
     		if (currentDistance >= dst - 3) {
-    			Robot.driveTrain.setLeft(-0.07);
-        		Robot.driveTrain.setRight(0.07);
+    			Robot.driveTrain.setLeft(-0.1);
+        		Robot.driveTrain.setRight(0.1);
         		Timer.delay(0.4);
     			Robot.driveTrain.setLeft(0.0);
         		Robot.driveTrain.setRight(0.0);
