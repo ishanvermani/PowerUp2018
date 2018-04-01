@@ -69,13 +69,14 @@ public class Robot extends TimedRobot {
 //		m_autonomousTestingChooser.addDefault("Turn 90 Degrees", new GyroTurnToAngle(90));
 //		SmartDashboard.putData("Auto mode", m_autonomousTestingChooser);
 		
-		m_autonomousRoutine.addDefault("Switch/Scale", "switchscale");
+		m_autonomousRoutine.addDefault("Switch", "switch");
+		m_autonomousRoutine.addObject("Scale", "scale");
 		m_autonomousRoutine.addObject("Cross Line (MUST BE IN LEFT OR RIGHT DS)", "cross");
 		SmartDashboard.putData("Auto Routine", m_autonomousRoutine);
+		
 		m_autonomousStartingPosition.addDefault("Left Position", "L");
 		m_autonomousStartingPosition.addObject("Middle Position", "M");
 		m_autonomousStartingPosition.addObject("Right Position", "R");
-		
 		SmartDashboard.putData("Starting Postion", m_autonomousStartingPosition);
 		
 //	    driveMode.addObject("Flight Stick Control", new FlightStickDrive());

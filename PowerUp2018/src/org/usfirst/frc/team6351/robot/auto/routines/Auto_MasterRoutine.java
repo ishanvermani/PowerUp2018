@@ -39,7 +39,7 @@ public class Auto_MasterRoutine extends CommandGroup {
 		if (which == "cross") {
 			addSequential(new Auto_DriveStraight(130));
 			DriverStation.reportError("Cross Line Auto",false);
-		} else {
+		} else if (which == "switch") {
 			if (startingPos == "M") {
 				DriverStation.reportError("Middle Auto",false);
 				if (switchPos.contains("L") == true) {
@@ -70,15 +70,6 @@ public class Auto_MasterRoutine extends CommandGroup {
 					addSequential(new GyroTurnToAngle(-90));
 					addSequential(new Auto_DriveStraight(20));
 					addSequential(new GrabberSolenoids());
-				} else if (scalePos.contains("R") == true) {
-					DriverStation.reportError("Right Scale",false);
-					//SCALE CODE iF NO SWITCH ON RIGHT
-				    addSequential(new Auto_DriveStraight(304,0.6));
-				    addSequential(new GyroTurnToAngle(90));
-				    addSequential(new Auto_DriveBackwards(5));
-				    addSequential(new Auto_ArmUpToScale());
-				    addSequential(new GrabberSolenoids());
-				    addSequential(new Auto_DriveStraight(10));
 				} else {
 					DriverStation.reportError("Right Auto No Options: Crossing Base Line",false);
 					addSequential(new Auto_DriveStraight(130));
@@ -92,18 +83,35 @@ public class Auto_MasterRoutine extends CommandGroup {
 					addSequential(new GyroTurnToAngle(90));
 					addSequential(new Auto_DriveStraight(20));
 					addSequential(new GrabberSolenoids());
-				} else if (scalePos.contains("L") == true) {
-					DriverStation.reportError("Left Scale",false);
-					//SCALE CODE iF NO SWITCH ON LEFT
-				    addSequential(new Auto_DriveStraight(304,0.6));
-				    addSequential(new GyroTurnToAngle(-90));
-				    addSequential(new Auto_DriveBackwards(5));
-				    addSequential(new Auto_ArmUpToScale());
-				    addSequential(new GrabberSolenoids());
-				    addSequential(new Auto_DriveStraight(10));
 				} else {
 					DriverStation.reportError("Left Auto No Options: Crossing Base Line",false);
 					addSequential(new Auto_DriveStraight(130));
+				}
+			}
+		} else if (which == "scale") {
+			if (startingPos == "R") {
+				DriverStation.reportError("Right Auto",false);
+				if (scalePos.contains("R") == true) {
+					DriverStation.reportError("Right Scale",false);
+					//SCALE CODE iF NO SWITCH ON RIGHT
+					addSequential(new Auto_DriveStraight(304,0.6));
+					addSequential(new GyroTurnToAngle(90));
+					addSequential(new Auto_DriveBackwards(5));
+					addSequential(new Auto_ArmUpToScale());
+					addSequential(new GrabberSolenoids());
+					addSequential(new Auto_DriveStraight(10));
+				}
+			} else if (startingPos == "L") {
+				DriverStation.reportError("Left Auto",false);
+				if (scalePos.contains("L") == true) {
+					DriverStation.reportError("Left Scale",false);
+					//SCALE CODE iF NO SWITCH ON LEFT
+					addSequential(new Auto_DriveStraight(304,0.6));
+					addSequential(new GyroTurnToAngle(-90));
+					addSequential(new Auto_DriveBackwards(5));
+					addSequential(new Auto_ArmUpToScale());
+					addSequential(new GrabberSolenoids());
+					addSequential(new Auto_DriveStraight(10));
 				}
 			}
 		}
