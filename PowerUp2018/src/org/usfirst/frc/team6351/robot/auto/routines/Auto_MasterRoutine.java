@@ -100,6 +100,12 @@ public class Auto_MasterRoutine extends CommandGroup {
 					addSequential(new Auto_ArmUpToScale());
 					addSequential(new GrabberSolenoids());
 					addSequential(new Auto_DriveStraight(10));
+				} else if (scalePos.contains("L") == true) {
+					DriverStation.reportError("Left Scale", false);
+					addSequential(new Auto_DriveStraight(235, 0.6));
+					addSequential(new GyroTurnToAngle(-90));
+					addSequential(new Auto_DriveStraight(191, 0.6));
+					addSequential(new GyroTurnToAngle(-90));
 				}
 			} else if (startingPos == "L") {
 				DriverStation.reportError("Left Auto",false);
@@ -112,7 +118,14 @@ public class Auto_MasterRoutine extends CommandGroup {
 					addSequential(new Auto_ArmUpToScale());
 					addSequential(new GrabberSolenoids());
 					addSequential(new Auto_DriveStraight(10));
+				} else if (scalePos.contains("R") == true) {
+					DriverStation.reportError("Right Scale", false);
+					addSequential(new Auto_DriveStraight(235, 0.6));
+					addSequential(new GyroTurnToAngle(90));
+					addSequential(new Auto_DriveStraight(191, 0.6));
+					addSequential(new GyroTurnToAngle(90));
 				}
+					
 			}
 		}
 	}
