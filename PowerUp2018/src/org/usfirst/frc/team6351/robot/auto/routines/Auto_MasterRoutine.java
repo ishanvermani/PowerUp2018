@@ -49,6 +49,7 @@ public class Auto_MasterRoutine extends CommandGroup {
 					addSequential(new Auto_DriveStraight(70));
 					addSequential(new GyroTurnToAngle(90));
 					addSequential(new Auto_ArmToPosition(850));
+					// maybe make the above and below parallel (addParallel(new Auto_ArmToPosition(850))
 					addSequential(new Auto_DriveStraight(60));
 					addSequential(new GrabberSolenoids());
 				} else if (switchPos.contains("R") == true) {
@@ -58,6 +59,7 @@ public class Auto_MasterRoutine extends CommandGroup {
 					addSequential(new Auto_DriveStraight(38));
 					addSequential(new GyroTurnToAngle(-90));
 					addSequential(new Auto_ArmToPosition(850));
+					// maybe make the above and below parallel (addParallel(new Auto_ArmToPosition(850))
 					addSequential(new Auto_DriveStraight(60));
 					addSequential(new GrabberSolenoids());
 				}
@@ -66,6 +68,7 @@ public class Auto_MasterRoutine extends CommandGroup {
 				if (switchPos.contains("R") == true) {
 					DriverStation.reportError("Right Switch",false);
 					addSequential(new Auto_DriveStraight(149));
+					// maybe make the above and below parallel (addParallel(new Auto_ArmToPosition(850))
 					addSequential(new Auto_ArmToPosition(850));
 					addSequential(new GyroTurnToAngle(-90));
 					addSequential(new Auto_DriveStraight(20));
@@ -79,6 +82,7 @@ public class Auto_MasterRoutine extends CommandGroup {
 				if (switchPos.contains("L") == true) {
 					DriverStation.reportError("Left Switch",false);
 					addSequential(new Auto_DriveStraight(149));
+					// maybe make the above and below parallel (addParallel(new Auto_ArmToPosition(850))
 					addSequential(new Auto_ArmToPosition(850));					
 					addSequential(new GyroTurnToAngle(90));
 					addSequential(new Auto_DriveStraight(20));
