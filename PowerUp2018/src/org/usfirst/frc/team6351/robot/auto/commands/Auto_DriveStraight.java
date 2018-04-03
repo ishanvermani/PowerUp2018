@@ -29,10 +29,10 @@ public class Auto_DriveStraight extends Command {
     	
     }
     
-    public Auto_DriveStraight(double distance) {
+    public Auto_DriveStraight(double distance, double speed) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	this(0.4, 0.0, distance);
+    	this(speed, 0.0, distance);
     	
     }
 
