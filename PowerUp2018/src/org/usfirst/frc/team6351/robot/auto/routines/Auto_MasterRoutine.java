@@ -50,7 +50,7 @@ public class Auto_MasterRoutine extends CommandGroup {
 					addSequential(new GyroTurnToAngle(90));
 					addSequential(new Auto_ArmToPosition(850));
 					// maybe make the above and below parallel (addParallel(new Auto_ArmToPosition(850))
-					addSequential(new Auto_DriveStraight(60));
+					addSequential(new Auto_DriveStraight(60)); //set to 0.6??
 					addSequential(new GrabberSolenoids());
 				} else if (switchPos.contains("R") == true) {
 					DriverStation.reportError("Middle Switch Right",false);
@@ -60,7 +60,7 @@ public class Auto_MasterRoutine extends CommandGroup {
 					addSequential(new GyroTurnToAngle(-90));
 					addSequential(new Auto_ArmToPosition(850));
 					// maybe make the above and below parallel (addParallel(new Auto_ArmToPosition(850))
-					addSequential(new Auto_DriveStraight(60));
+					addSequential(new Auto_DriveStraight(60)); //set to 0.6??
 					addSequential(new GrabberSolenoids());
 				}
 			} else if (startingPos == "R") {
